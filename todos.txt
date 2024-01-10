@@ -1,0 +1,25 @@
+1. Install NodeJS (nodejs.org)
+2. Install Visual Studio Code (code.visualstudio.com)
+3. Open Visual Studio Code as Administrator
+4. Go to the Extensions pane in Visual Studio Code and search for Crestron. Install the Crestron components extension.
+5. Open a new terminal and run the command: Set-ExecutionPolicy RemoteSigned
+6. From the terminal, install Angular by typing: npm install -g @angular/cli
+7. From the terminal, install the Crestron CH5 CLI Utilities by typing: npm install -g @crestron/ch5-utilities-cli
+8. From the terminal, create a new project by typing: ng new demo
+9. Navigate to File, Open Folder and select the Demo folder that was created in the previous step.
+10. Open a new terminal and add the CH5-crcomlib library by typing: ng add @crestron/ch5-crcomlib
+11. From the terminal, install the CH5-theme library by typing: ng add @crestron/ch5-theme
+12. Add the ch5-crcomlib library to the project by modifying the angular.json file and adding "./node_modules/@crestron/ch5-crcomlib/build_bundles/umd/cr-com-lib.js" to the scripts section (2 different places)
+13. Add the ch5-theme library to the project by modifying the angular.json file and adding “./node_modules/@crestron/ch5-theme/output/themes/light-theme.css” to the styles section (2 different places)
+14. Open the tsconfig.json file and change the target from: es2015 to es5
+15. From the terminal, verify things are working properly, type: ng serve
+16. Verify in Chrome that HTTP://localhost:4200 shows your demo project
+17. Open src/index.html and remove the line: base href=”/”
+18. Open src/app/app.module.ts and modify the providers w/ providers: [ { provide: APP_BASE_HREF, useValue: './' } ]
+19. Open src/app/app.module.ts and add schemas w/ schemas: [ CUSTOM_ELEMENTS_SCHEMA ],
+20. Open src/app/app.component.html and remove all of the standard text. Replace it with: ch5-button shape="rounded-rectangle" sendeventonclick="21" receivestateselected="21" label=“Demo!”
+21. See the button in your Chrome browser.
+22. Press CTRL-C to kill the dev server
+23. Build your project at the terminal by typing: ng build --prod
+24. Package your project by typing: ch5-cli archive -p demo -d dist/demo -o dist
+25. Deploy to a touch screen by typing: ch5-cli deploy -H [IP ADDRESS/HOST] -t touchscreen dist/demo.ch5z
